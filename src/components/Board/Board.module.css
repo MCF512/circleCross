@@ -1,0 +1,14 @@
+.board {
+  display: flex;
+  flex-wrap: wrap;
+  width: 480px;
+  gap: 5px;
+}
+
+.cell {
+  width: 150px;
+  height: 150px;
+  font-size: 100px;
+  padding: 0;
+  margin: 0;
+}
