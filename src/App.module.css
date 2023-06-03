@@ -5,3 +5,14 @@
   flex-wrap: wrap;
   margin: 0 auto;
 }
+
+.reset {
+  font-size: 20px;
+  display: block;
+  margin: 0 auto;
+  padding: 15px;
+  border-radius: 5px;
+  border-color: #77de99;
+  color: #77de99;
+  background-color: transparent;
+}
