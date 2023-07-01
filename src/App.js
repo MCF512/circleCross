@@ -47,18 +47,20 @@ function App() {
 
 
   return (
-    <div>
-      <Info
-        isDraw={isDraw}
-        isGameEnded={isGameEnded}
-        XO={XO}
-      />
-      <Board
-        fields={fields}
-        onClick={handleClick}
-      />
+    <div className={st.inner}>
+      <div className={st.wrapper}>
+        <Info
+          isDraw={isDraw}
+          isGameEnded={isGameEnded}
+          XO={XO}
+        />
+        <Board
+          fields={fields}
+          onClick={handleClick}
+        />
 
-      <button className={st.reset} onClick={handleReset}>Начать заново</button>
+        <button className={st.reset} onClick={handleReset}>Начать заново</button>
+      </div>
     </div>
   )
 }

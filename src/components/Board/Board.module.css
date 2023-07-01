@@ -17,4 +17,9 @@
   border-radius: 5px;
   border-color: #77de99;
   color: #77de99;
+  transition: background-color 0.3s;
+}
+
+.cell:hover {
+  background-color: rgba(0, 0, 0, 0.05);
 }
