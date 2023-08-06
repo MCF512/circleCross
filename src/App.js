@@ -1,50 +1,35 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import st from './App.module.css';
 import { field as initialFields } from './constants/field';
 import { Board } from './components/Board/Board';
 import { Info } from './components/Info/Info';
 import { checkWin, checkDraw } from './utils/index'
+import { store } from './store/store';
 
 function App() {
-
-  const [fields, setFields] = useState(initialFields);
-  const [XO, setXO] = useState('X');
-  const [isGameEnded, setIsGameEnded] = useState(false);
-  const [isDraw, setIsDraw] = useState(false);
+  const [storeState, setStoreState] = useState(store.getState())
+  let { fields, currentPlayer, isGameEnded, isDraw } = storeState;
 
   const handleReset = () => {
-    setFields(initialFields)
-    setIsGameEnded(false)
-    setIsDraw(false)
-    setXO('X')
+    store.dispatch(
+      { type: 'RESET_GAME' }
+    )
+    store.subscribe(() => {
+      console.log('store updated')
+      setStoreState(() => store.getState())
+    })
   }
 
-  const handleClick = (e, ind) => {
-    if (isGameEnded) return;
 
-    if (fields[ind]) {
-      return
-    } else {
-      let updatedFields = [...fields];
-      updatedFields[ind] = XO;
-      setFields(updatedFields)
-
-
-      if (checkWin(updatedFields, XO)) {
-        setIsGameEnded(true)
-        return
-      }
-
-      if (checkDraw(updatedFields)) {
-        setIsDraw(true)
-        return
-      }
-
-      let updatedXO = XO == "X" ? "O" : "X"
-      setXO(updatedXO)
-    }
+  const handleClick = (index) => {
+    store.dispatch(
+      { type: 'SET_PLAYER', payload: index }
+    )
+    store.subscribe(() => {
+      console.log('store updated')
+      setStoreState(() => store.getState())
+    })
   }
-
 
   return (
     <div className={st.inner}>
@@ -52,7 +37,7 @@ function App() {
         <Info
           isDraw={isDraw}
           isGameEnded={isGameEnded}
-          XO={XO}
+          currentPlayer={currentPlayer}
         />
         <Board
           fields={fields}
