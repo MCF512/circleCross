@@ -1,8 +1,8 @@
 import st from './Info.module.css';
-import { store } from '../../store/store';
+import { useSelector } from 'react-redux';
 
 export const Info = () => {
-  const state = store.getState();
+  const state = useSelector((state) => state)
 
   return (
     <div className={st.info}>

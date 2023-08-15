@@ -1,27 +1,19 @@
-import { useEffect, useState } from 'react';
 import st from './App.module.css';
 import { Board } from './components/Board/Board';
 import { Info } from './components/Info/Info';
-import { store } from './store/store';
+import { useDispatch } from 'react-redux';
 
 function App() {
-  const [storeState, setStoreState] = useState(store.getState())
-
-  useEffect(() => {
-    store.subscribe(() => {
-      setStoreState(() => store.getState())
-    })
-  }, [])
+  const dispatch = useDispatch()
 
   const handleReset = () => {
-    store.dispatch(
+    dispatch(
       { type: 'RESET_GAME' }
     )
   }
 
-
   const handleClick = (index) => {
-    store.dispatch(
+    dispatch(
       { type: 'SET_PLAYER', payload: index }
     )
   }
@@ -29,7 +21,7 @@ function App() {
   return (
     <div className={st.inner}>
       <div className={st.wrapper}>
-        <Info/>
+        <Info />
         <Board
           onClick={handleClick}
         />
