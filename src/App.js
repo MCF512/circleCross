@@ -1,35 +1,46 @@
-import st from './App.module.css';
-import { Board } from './components/Board/Board';
-import { Info } from './components/Info/Info';
-import { useDispatch } from 'react-redux';
+import { Component } from 'react';
+import { Board, Info } from './components';
+import { connect } from 'react-redux';
 
-function App() {
-  const dispatch = useDispatch()
+class AppContainer extends Component {
+  render() {
+    return (
+      <div className="h-screen w-full flex items-center justify-center">
+        <div className="wrapper">
+          <Info />
+          <Board
+            onClick={this.props.handleClick}
+          />
 
-  const handleReset = () => {
+          <button className="
+          my-0
+          mx-auto
+          block 
+          text-xl
+        text-green-400 
+          p-4
+          border-2
+          border-green-400
+          rounded
+          "
+            onClick={this.props.handleReset}>Начать заново</button>
+        </div>
+      </div>
+    )
+  }
+}
+
+const mapDispatchToProps = (dispatch) => ({
+  handleReset: () => {
     dispatch(
       { type: 'RESET_GAME' }
     )
-  }
-
-  const handleClick = (index) => {
+  },
+  handleClick: (index) => {
     dispatch(
       { type: 'SET_PLAYER', payload: index }
     )
   }
+})
 
-  return (
-    <div className={st.inner}>
-      <div className={st.wrapper}>
-        <Info />
-        <Board
-          onClick={handleClick}
-        />
-
-        <button className={st.reset} onClick={handleReset}>Начать заново</button>
-      </div>
-    </div>
-  )
-}
-
-export default App;
+export const App = connect(null, mapDispatchToProps)(AppContainer)

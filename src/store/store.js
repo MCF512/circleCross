@@ -19,7 +19,7 @@ const appReducer = (state = initialState, action) => {
       } else {
         let updatedFields = [...state.fields];
         updatedFields[action.payload] = state.currentPlayer;
-        let nextPlayer = state.currentPlayer == 'X' ? 'O' : 'X'
+        let nextPlayer = state.currentPlayer === 'X' ? 'O' : 'X'
 
         if (checkWin(updatedFields, state.currentPlayer)) {
           return { ...state, fields: updatedFields, isGameEnded: true }
@@ -29,7 +29,6 @@ const appReducer = (state = initialState, action) => {
           return { ...state, fields: updatedFields, isDraw: true }
         }
 
-        console.log(state)
         return { ...state, fields: updatedFields, currentPlayer: nextPlayer }
       }
     default:

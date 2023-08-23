@@ -1,12 +1,21 @@
-import st from './Info.module.css';
-import { useSelector } from 'react-redux';
+import { Component } from 'react';
+import { connect } from 'react-redux';
 
-export const Info = () => {
-  const state = useSelector((state) => state)
+class InfoContainer extends Component {
 
-  return (
-    <div className={st.info}>
-      {state.isDraw ? 'Ничья' : state.isGameEnded ? `Победа ${state.currentPlayer}` : `Ход ${state.currentPlayer}`}
-    </div>
-  )
+  render() {
+    return (
+      <div className='text-3xl text-center text-green-500 mb-5  font-bold'>
+        {this.props.isDraw ? 'Ничья' : this.props.isGameEnded ? `Победа ${this.props.currentPlayer}` : `Ход ${this.props.currentPlayer}`}
+      </div>
+    )
+  }
 }
+
+const mapStateToProps = (state) => ({
+  isDraw: state.isDraw,
+  isGameEnded: state.isGameEnded,
+  currentPlayer: state.currentPlayer
+})
+
+export const Info = connect(mapStateToProps)(InfoContainer)
