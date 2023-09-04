@@ -1,35 +1,54 @@
-import st from './App.module.css';
-import { Board } from './components/Board/Board';
-import { Info } from './components/Info/Info';
+import { Board, Info, PlayersForm, Timer, Button, GameHistory } from './components';
 import { useDispatch } from 'react-redux';
+import { RESET_GAME, SHOW_PLAYERS_FORM, RESET_TIMER } from './store';
 
-function App() {
+export const App = () => {
   const dispatch = useDispatch()
 
   const handleReset = () => {
     dispatch(
-      { type: 'RESET_GAME' }
+      { type: RESET_TIMER }
+    )
+    dispatch(
+      { type: RESET_GAME }
     )
   }
 
-  const handleClick = (index) => {
+  const showPlayersForm = () => {
     dispatch(
-      { type: 'SET_PLAYER', payload: index }
+      { type: SHOW_PLAYERS_FORM }
     )
   }
 
   return (
-    <div className={st.inner}>
-      <div className={st.wrapper}>
-        <Info />
-        <Board
-          onClick={handleClick}
-        />
+    <div className="
+      h-screen
+      w-full
+      flex
+      items-center
+      justify-center
+      ">
+      <PlayersForm />
 
-        <button className={st.reset} onClick={handleReset}>Начать заново</button>
+      <div className="
+      flex
+      items-end
+      justify-between
+      w-full
+      ">
+        <div className="wrapper justify-self-center">
+          <Timer />
+
+          <Info />
+          <Board />
+
+          <div className="flex justify-between mb-5">
+            <Button onClick={handleReset}>Начать заново</Button>
+            <Button onClick={showPlayersForm}>Сменить игроков</Button>
+          </div>
+        </div>
       </div>
+      <GameHistory />
     </div>
   )
 }
-
-export default App;

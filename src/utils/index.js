@@ -1,11 +1,6 @@
-import { WINS } from "../constants"
-
-export const checkWin = (fields, currentPlayer) => {
-  return WINS.some((winComb) =>
-    winComb.every((ind) => fields[ind] === currentPlayer)
-  )
-}
-
-export const checkDraw = (fields) => {
-  return fields.every((field) => field)
-}
+export * from './reusltChecks/checkWin';
+export * from './reusltChecks/checkDraw';
+export * from './localStorageResults/saveResultToLocalStorage';
+export * from './localStorageResults/setResultToLocalStorage';
+export * from './localStorageResults/getResultsFromLocalStorage';
+export * from './localStorageResults/resetResultsFromLocalStorage';

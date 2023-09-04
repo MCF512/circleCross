@@ -8,3 +8,7 @@ export const WINS = [
   [0, 4, 8],
   [2, 4, 6],
 ];
+
+export const field = [
+  "", "", "", "", "", "", "", "", ""
+];
